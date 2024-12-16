@@ -3,20 +3,37 @@ package dev.group.cybershield.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
+import java.time.LocalDateTime;
+
 @Data
+@Entity
+@Table(name = "QUESTION_MASTER")
 public class Questions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long question_id;
+    @Column(name = "question_id")
+    private int id;
 
+    @Column(name = "question")
     private String question;
-    private String option1;
-    private String option2;
-    private String option3;
-    private String option4;
+
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "level")
+    private String level;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "status")
     private String status;
-    private String created_on;
-    private String updated_on;
+
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
+
+    @Column(name = "updated_on")
+    private LocalDateTime updatedOn;
+
 }
