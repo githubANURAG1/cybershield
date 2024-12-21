@@ -1,5 +1,6 @@
 package dev.group.cybershield.quiz;
 
+import dev.group.cybershield.common.exception.BadRequestException;
 import dev.group.cybershield.common.global.ResponseDTO;
 import dev.group.cybershield.common.utils.ResponseUtil;
 import dev.group.cybershield.entity.Questions;
@@ -9,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -28,11 +27,14 @@ public class QuizController {
     @Autowired
     private QuestionRepo questionRepo;
 
-    @GetMapping("/v1.0/getQuestion")
-    public ResponseEntity<ResponseDTO> getQuestions(){
+    @PostMapping("/v1.0/getQuestion")
+    public ResponseEntity<ResponseDTO> getQuestions(@RequestBody Long id){
         String endPoint = "getQuestions";
         Timestamp landingTime = Timestamp.valueOf(LocalDateTime.now());
-        Optional<Questions> questionData = questionRepo.findById(1L);
+        if(id == null){
+            throw new BadRequestException("Id is mandatory");
+        }
+        Optional<Questions> questionData = questionRepo.findById(id);
         log.info("fetched data from database " + questionData.get());
         return ResponseUtil.sendResponse(questionData.get(), landingTime, HttpStatus.OK, 200, "Successfully" , endPoint);
     }

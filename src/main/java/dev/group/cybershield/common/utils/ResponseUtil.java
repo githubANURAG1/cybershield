@@ -1,10 +1,12 @@
 package dev.group.cybershield.common.utils;
 
+import dev.group.cybershield.common.constants.Constants;
 import dev.group.cybershield.common.global.ResponseDTO;
 import dev.group.cybershield.entity.Questions;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -15,7 +17,7 @@ public class ResponseUtil {
         ResponseDTO response = new ResponseDTO();
         response.getResponseMessage().setLandingTime(landingTime);
         response.getResponseMessage().setResponseTime(Timestamp.valueOf(LocalDateTime.now()));
-        response.getResponseMessage().setMessage("SUCCESS");
+        response.getResponseMessage().setMessage(Constants.SUCCESS);
         response.getResponseMessage().setStatus(0);
         response.getResponseMessage().setHttpStatus(actualStatus);
         response.setTitle(title);
@@ -30,7 +32,7 @@ public class ResponseUtil {
         ResponseDTO response = new ResponseDTO();
         response.getResponseMessage().setLandingTime(landingTime);
         response.getResponseMessage().setResponseTime(Timestamp.valueOf(LocalDateTime.now()));
-        response.getResponseMessage().setMessage("SUCCESS");
+        response.getResponseMessage().setMessage(Constants.SUCCESS);
         response.getResponseMessage().setStatus(0);
         response.getResponseMessage().setHttpStatus(actualStatus);
         response.setTitle(title);
@@ -46,7 +48,7 @@ public class ResponseUtil {
         ResponseDTO errorResponse = new ResponseDTO();
         errorResponse.getResponseMessage().setLandingTime(landingTime);
         errorResponse.getResponseMessage().setResponseTime(Timestamp.valueOf(LocalDateTime.now()));
-        errorResponse.getResponseMessage().setMessage("FAILURE");
+        errorResponse.getResponseMessage().setMessage(Constants.FAILURE);
         errorResponse.getErrorDto().setErrorCode(errorCode);
         errorResponse.getErrorDto().setErrorMessage(errorMessage);
         errorResponse.getResponseMessage().setStatus(1);
