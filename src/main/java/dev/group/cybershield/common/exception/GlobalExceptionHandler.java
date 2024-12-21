@@ -1,6 +1,5 @@
 package dev.group.cybershield.common.exception;
 
-import dev.group.cybershield.common.exception.BadRequestException;
 import dev.group.cybershield.common.global.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,6 @@
 package dev.group.cybershield.quiz;
 
+import dev.group.cybershield.common.constants.Constants;
 import dev.group.cybershield.common.exception.BadRequestException;
 import dev.group.cybershield.common.global.ResponseDTO;
 import dev.group.cybershield.common.utils.ResponseUtil;
@@ -28,15 +29,17 @@ public class QuizController {
     private QuestionRepo questionRepo;
 
     @PostMapping("/v1.0/getQuestion")
-    public ResponseEntity<ResponseDTO> getQuestions(@RequestBody Long id){
+    public ResponseEntity<ResponseDTO> getQuestions(@RequestBody Questions request) {
         String endPoint = "getQuestions";
         Timestamp landingTime = Timestamp.valueOf(LocalDateTime.now());
-        if(id == null){
+
+        if(request.getId() == null) {
             throw new BadRequestException("Id is mandatory");
         }
-        Optional<Questions> questionData = questionRepo.findById(id);
+
+        Optional<Questions> questionData = questionRepo.findById(request.getId());
         log.info("fetched data from database " + questionData.get());
-        return ResponseUtil.sendResponse(questionData.get(), landingTime, HttpStatus.OK, 200, "Successfully" , endPoint);
+        return ResponseUtil.sendResponse(questionData.get(), landingTime, HttpStatus.OK, 200, Constants.SUCCESS, endPoint);
     }
 
     @GetMapping("/v1.0/getAllQuestions")
@@ -44,6 +47,6 @@ public class QuizController {
         String endPoint = "getAllQuestions";
         Timestamp landingTime = Timestamp.valueOf(LocalDateTime.now());
         List<Questions> allQuestions = questionRepo.findAll();
-        return ResponseUtil.sendResponse(allQuestions , landingTime, HttpStatus.OK, 200, "Successfully" , endPoint);
+        return ResponseUtil.sendResponse(allQuestions , landingTime, HttpStatus.OK, 200, Constants.SUCCESS , endPoint);
     }
 }
