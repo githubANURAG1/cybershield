@@ -55,7 +55,7 @@ public class QuizController {
         Try{
         String endPoint = "getTest"
         TimeStamp landingTime = Timestamp.valueOf(LocalDateTime.now());
-        GetTestResponse response = Quiz.getTestService(user);
+        GetTestResponse response = QuizServices.getTestService(user);
         return ResponseUtil.sendResponse(response, landingTime, HttpStatus.OK, 200, Constants.SUCCESS, endPoint);
         }
         catch(Exception e){
