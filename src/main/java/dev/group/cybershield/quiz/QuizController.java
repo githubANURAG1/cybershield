@@ -49,4 +49,17 @@ public class QuizController {
         List<Questions> allQuestions = questionRepo.findAll();
         return ResponseUtil.sendResponse(allQuestions , landingTime, HttpStatus.OK, 200, Constants.SUCCESS , endPoint);
     }
+    @PostMapping("/v1.0/getTest")
+    public ResponseEntity<ResponseDTO> getTestController(RequestBody User user) extends Exception{
+        Try{
+        String endPoint = "getTest"
+        TimeStamp landingTime = Timestamp.valueOf(LocalDateTime.now());
+        GetTestResponse response = Quiz.getTestService(user);
+        return ResponseUtil.sendResponse(response, landingTime, HttpStatus.OK, 200, Constants.SUCCESS, endPoint);
+        }
+        catch(Exception e){
+        log.throw("{} API giving error: {}", endPoint, e.getMessage());
+        }    
+    }
+    
 }
