@@ -49,6 +49,7 @@ public class QuizController {
         List<Questions> allQuestions = questionRepo.findAll();
         return ResponseUtil.sendResponse(allQuestions , landingTime, HttpStatus.OK, 200, Constants.SUCCESS , endPoint);
     }
+    
     @PostMapping("/v1.0/getTest")
     public ResponseEntity<ResponseDTO> getTestController(RequestBody User user) extends Exception{
         Try{
