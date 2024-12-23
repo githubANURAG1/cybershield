@@ -28,6 +28,9 @@ public class QuizController {
     @Autowired
     private QuestionRepo questionRepo;
 
+    @Autowired 
+    private QuizServices quizServices;
+
     @PostMapping("/v1.0/getQuestion")
     public ResponseEntity<ResponseDTO> getQuestions(@RequestBody Questions request) {
         String endPoint = "getQuestions";
@@ -55,7 +58,7 @@ public class QuizController {
         Try{
         String endPoint = "getTest"
         TimeStamp landingTime = Timestamp.valueOf(LocalDateTime.now());
-        GetTestResponse response = QuizServices.getTestService(user);
+        GetTestResponse response = quizServices.getTestService(user);
         return ResponseUtil.sendResponse(response, landingTime, HttpStatus.OK, 200, Constants.SUCCESS, endPoint);
         }
         catch(Exception e){
